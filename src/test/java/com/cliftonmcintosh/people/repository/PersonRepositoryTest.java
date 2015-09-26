@@ -58,11 +58,11 @@ public class PersonRepositoryTest {
 
         List<Person> allFeldmans = repository.findByLastName(FELDMAN);
         Assert.assertEquals("There should be two people with the last name \"Feldman\"", 2, allFeldmans.size());
-        Assert.assertTrue(allFeldmans.stream().allMatch(thePerson -> FELDMAN.equals(thePerson.getLastName())));
+        Assert.assertTrue("The last name of the people found should match the one used for searching", lastNameMatches(allFeldmans, FELDMAN));
 
         List<Person> allFeldmanns = repository.findByLastName(FELDMANN);
         Assert.assertEquals("There should be one person with the last name \"Feldmann\"", 1, allFeldmanns.size());
-        Assert.assertTrue(allFeldmanns.stream().allMatch(thePerson -> FELDMANN.equals(thePerson.getLastName())));
+        Assert.assertTrue("The last name of the people found should match the one used for searching", lastNameMatches(allFeldmanns, FELDMANN));
     }
 
     @Test
@@ -74,11 +74,11 @@ public class PersonRepositoryTest {
 
         List<Person> allJoes = repository.findByFirstName(JOE);
         Assert.assertEquals("There should be two people with the first name \"Joe\"", 2, allJoes.size());
-        Assert.assertTrue(allJoes.stream().allMatch(thePerson -> JOE.equals(thePerson.getFirstName())));
+        Assert.assertTrue("The first name of the people found should match the one used for searching", firstNameMatches(allJoes, JOE));
 
         List<Person> allJosephs = repository.findByFirstName(JOSEPH);
         Assert.assertEquals("There should be one person with the first name \"Joseph\"", 1, allJosephs.size());
-        Assert.assertTrue(allJosephs.stream().allMatch(thePerson -> JOSEPH.equals(thePerson.getFirstName())));
+        Assert.assertTrue("The first name of the people found should match the one used for searching" ,firstNameMatches(allJosephs, JOSEPH));
     }
 
     @Test
@@ -90,15 +90,15 @@ public class PersonRepositoryTest {
 
         List<Person> allJosephFeldmans = repository.findByFirstNameAndLastName(JOSEPH, FELDMAN);
         Assert.assertEquals("There should be one person named \"Joseph Feldman\"", 1, allJosephFeldmans.size());
-        Assert.assertTrue(allJosephFeldmans.stream().allMatch(thePerson -> JOSEPH.equals(thePerson.getFirstName()) && FELDMAN.equals(thePerson.getLastName())));
+        Assert.assertTrue("The first and last names should match the ones used for searching", firstAndLastNameMatch(allJosephFeldmans, JOSEPH, FELDMAN));
 
         List<Person> allJoeFeldmans = repository.findByFirstNameAndLastName(JOE, FELDMAN);
         Assert.assertEquals("There should be one person named \"Joe Feldman\"", 1, allJoeFeldmans.size());
-        Assert.assertTrue(allJoeFeldmans.stream().allMatch(thePerson -> JOE.equals(thePerson.getFirstName()) && FELDMAN.equals(thePerson.getLastName())));
+        Assert.assertTrue("The first and last names should match the ones used for searching", firstAndLastNameMatch(allJoeFeldmans, JOE, FELDMAN));
 
         List<Person> allJoeFeldmanns = repository.findByFirstNameAndLastName(JOE, FELDMANN);
         Assert.assertEquals("There should be one person named \"Joe Feldmann\"", 1, allJoeFeldmanns.size());
-        Assert.assertTrue(allJoeFeldmanns.stream().allMatch(thePerson -> JOE.equals(thePerson.getFirstName()) && FELDMANN.equals(thePerson.getLastName())));
+        Assert.assertTrue("The first and last names should match the ones used for searching", firstAndLastNameMatch(allJoeFeldmanns, JOE, FELDMANN));
     }
 
     private Person saveJosephFeldman() {
@@ -125,5 +125,17 @@ public class PersonRepositoryTest {
         joeFeldmann.setLastName(FELDMANN);
 
         repository.save(joeFeldmann);
+    }
+
+    private boolean lastNameMatches(List<Person> people, String expectedLastName) {
+        return people.stream().allMatch(person -> expectedLastName.equals(person.getLastName()));
+    }
+
+    private boolean firstNameMatches(List<Person> people, String expectedFirstName) {
+        return people.stream().allMatch(person -> expectedFirstName.equals(person.getFirstName()));
+    }
+
+    private boolean firstAndLastNameMatch(List<Person> people, String expectedFirstName, String expectedLastName) {
+        return people.stream().allMatch(person -> expectedFirstName.equals(person.getFirstName()) && expectedLastName.equals(person.getLastName()));
     }
 }
