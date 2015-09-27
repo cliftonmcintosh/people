@@ -40,11 +40,11 @@ Removing a person from a family is done by making a DELETE request to the person
 
 `curl -i -H "Accept: application/json" -X DELETE http://localhost:8080/people/6/family`
 
-This disolves the association between the person and the family. It does not delete the family, even when the person is that last person associated with the family.
+This dissolves the association between the person and the family. It does not delete the family, even when the person is that last person associated with the family.
 
 ## Deleting a family
 Deleting a family is done by making a DELETE request to the family's endpoint:
 
 `curl -i -H "Accept: application/json" -X DELETE http://localhost:8080/families/3`
 
-This deletes the family. It disolves the family and removes each person's association with that family, but it not kill its people.
+This deletes the family. It dissolves the family and removes each person's association with that family, but it not kill its people.
