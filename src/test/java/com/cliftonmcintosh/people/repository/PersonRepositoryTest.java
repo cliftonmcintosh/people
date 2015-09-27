@@ -19,7 +19,6 @@ import java.util.List;
 @SpringApplicationConfiguration(classes = {RepositoryConfiguration.class})
 public class PersonRepositoryTest {
 
-
     public static final String JOSEPH = "Joseph";
     public static final String FELDMAN = "Feldman";
     public static final String JOE = "Joe";
@@ -37,7 +36,7 @@ public class PersonRepositoryTest {
     }
 
     @Test
-    public void testSavePerson() {
+    public void testSavePersonWithTheParametersGiven() {
         Person person = saveJosephFeldman();
 
         Person foundPerson = repository.findOne(person.getId());
@@ -106,8 +105,7 @@ public class PersonRepositoryTest {
         josephFeldman.setFirstName(JOSEPH);
         josephFeldman.setLastName(FELDMAN);
 
-        repository.save(josephFeldman);
-        return josephFeldman;
+        return repository.save(josephFeldman);
     }
 
     private void saveThree() {
