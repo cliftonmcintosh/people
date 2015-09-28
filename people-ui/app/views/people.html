@@ -1,0 +1,22 @@
+<p>This is the people view.</p>
+
+
+<form name="createForm" action="#">
+  <h4>Create a Person</h4>
+  <input ng-model="newPerson.firstName" type="text">
+  <input ng-model="newPerson.lastName" type="text">
+  <input id="create" type="button" value="Create" ng-click="createPerson(newPerson)">
+</form>
+<br/>
+<h4>View, Update and Delete Existing People</h4>
+<div ng-repeat="person in people | orderBy:'lastName'">
+
+  <form action="#">
+    <label>Person <input id="firstName" ng-model="person.firstName" type="text">
+      <input id="lastName" ng-model="person.lastName" type="text"></label>
+    <input id="update" type="button" value="Update" ng-click="updatePerson(person)">
+    <input id="delete" type="button" value="Delete" ng-click="deletePerson(person)">
+  </form>
+  <p>The API resource for <a href="{{ person._links.self.href}}" target="_blank">{{ person.firstName }} {{ person.lastName }}</a></p>
+  <br/>
+</div>

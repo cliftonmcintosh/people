@@ -11,21 +11,24 @@
 angular
   .module('peopleUiApp', [
     'ngResource',
-    'ngRoute'
+    'ngRoute',
+    'spring-data-rest'
   ])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
-      })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
-  });
+  .config(['$routeProvider',
+    function config($routeProvider) {
+      $routeProvider
+        .when('/', {
+          templateUrl: 'views/main.html',
+          controller: 'MainCtrl',
+          controllerAs: 'main'
+        })
+        .when('/people', {
+          templateUrl: 'views/people.html',
+          controller: 'PeopleCtrl',
+          controllerAs: 'people'
+        })
+        .otherwise({
+          redirectTo: '/'
+        });
+
+    }]);

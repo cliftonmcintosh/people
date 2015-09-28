@@ -1,4 +1,5 @@
 'use strict';
+/* global describe, beforeEach, expect */
 
 describe('Controller: MainCtrl', function () {
 
