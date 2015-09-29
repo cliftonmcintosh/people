@@ -2,7 +2,6 @@
 
 describe('Controller: PeopleCtrl', function () {
 
-  // load the controller's module
   beforeEach(module('peopleUiApp'));
 
   var PeopleCtrl,

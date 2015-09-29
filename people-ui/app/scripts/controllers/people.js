@@ -2,15 +2,10 @@
 
 'use strict';
 
-/**
- * @ngdoc function
- * @name peopleUiApp.controller:PeopleCtrl
- * @description
- * # PeopleCtrl
- * Controller of the peopleUiApp
- */
-angular.module('peopleUiApp')
-  .controller('PeopleCtrl', ['$scope', '$log', 'PeopleService', function ($scope, $log, PeopleService) {
+var ppl = ppl || {};
+
+(function (ns){
+  ns.PeopleCtrl = function PeopleCtrl($scope, $log, PeopleService) {
 
     $scope.people = [];
     $scope.newPerson = {
@@ -48,4 +43,15 @@ angular.module('peopleUiApp')
 
     getAllPeople();
 
-  }]);
+  }
+})(ppl);
+
+/**
+ * @ngdoc function
+ * @name peopleUiApp.controller:PeopleCtrl
+ * @description
+ * # PeopleCtrl
+ * Controller of the peopleUiApp
+ */
+angular.module('peopleUiApp')
+  .controller('PeopleCtrl', ['$scope', '$log', 'PeopleService', ppl.PeopleCtrl]);
