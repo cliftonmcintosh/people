@@ -27,8 +27,6 @@ angular.module('peopleUiApp')
       });
     }
 
-    getAllPeople();
-
     $scope.createPerson = function createPerson(person) {
       PeopleService.createPerson(person).then(function (data) {
         $log.info("The location of the record is " + data);
@@ -47,5 +45,7 @@ angular.module('peopleUiApp')
     $scope.deletePerson = function deletePerson(person) {
       PeopleService.deletePerson(person).then(getAllPeople);
     };
+
+    getAllPeople();
 
   }]);

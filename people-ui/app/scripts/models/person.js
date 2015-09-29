@@ -24,7 +24,5 @@ ppl.Person = function Person(initializationData) {
     person.selfLink = link;
   };
 
-
   return person;
-
 };
