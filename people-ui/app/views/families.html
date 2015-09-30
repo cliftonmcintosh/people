@@ -1,0 +1,35 @@
+<h3>Create, Update, Delete and View Families</h3>
+<br/>
+
+<form name="createForm" action="#">
+  <h4>Create a Family</h4>
+  <div ng-repeat="newPerson in newFamily">
+    <input ng-model="newPerson.firstName" type="text">
+    <input ng-model="newPerson.lastName" type="text">
+    <br/>
+  </div>
+  <input id="another" type="button" value="Add Another Person" ng-click="addPerson()">
+  <input id="createFamily" type="button" value="Create Family" ng-click="createFamily()">
+</form>
+<br/>
+
+<h3>View, Update and Delete Existing Families</h3>
+<div ng-repeat="family in families">
+  <h4>A Family of {{ family.people.length }}</h4>
+  <div ng-repeat="person in family.people">
+    <span>{{person.firstName}} {{person.lastName}} <input id="remove" type="button" value="Remove From Family" ng-click="removePersonFromFamily(person)"></span>
+  </div>
+
+  <form name="peopleForm">
+    <label for="peopleSelect"> Add a Person to This Family </label>
+    <select name="peopleSelect" id="peopleSelect" ng-model="personToAdd">
+      <option ng-repeat="person in people" value="{{person.selfLink}}">{{person.firstName}} {{person.lastName}}</option>
+        <input id="add" type="button" value="Add" ng-click="addPersonToFamily(personToAdd, family.selfLink)">
+    </select>
+  </form>
+  <input id="delete" type="button" value="Delete This Family" ng-click="deleteFamily(family)">
+
+  <p>View the API resource for <a href="{{ family.selfLink }}" target="_blank">{{ family.selfLink}}</a></p>
+  <br/>
+</div>
+

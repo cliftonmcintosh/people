@@ -27,6 +27,11 @@ angular
           controller: 'PeopleCtrl',
           controllerAs: 'people'
         })
+        .when('/families', {
+          templateUrl: 'views/families.html',
+          controller: 'FamiliesCtrl',
+          controllerAs: 'families'
+        })
         .otherwise({
           redirectTo: '/'
         });

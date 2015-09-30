@@ -2,8 +2,8 @@
 
 var ppl = ppl || {};
 
-ppl.Person = function Person(initializationData) {
-  var person = {};
+ppl.Family = function Family(initializationData) {
+  var family = {};
 
   function getSelfLink(initializationData) {
     var selfLink;
@@ -16,14 +16,13 @@ ppl.Person = function Person(initializationData) {
   }
 
   initializationData = initializationData || {};
-  person.firstName = initializationData.firstName;
-  person.lastName = initializationData.lastName;
-  person.selfLink = getSelfLink(initializationData);
-  person.id = person.selfLink.slice(-1);
+  family.people = initializationData.people;
+  family.selfLink = getSelfLink(initializationData);
+  family.id = family.selfLink ? family.selfLink.slice(-1) : -1;
 
-  person.setSelfLink = function setSelfLink(link) {
-    person.selfLink = link;
+  family.setSelfLink = function setSelfLink(link) {
+    family.selfLink = link;
   };
 
-  return person;
+  return family;
 };

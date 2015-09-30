@@ -10,12 +10,24 @@ var ppl = ppl || {};
     function getAllPeople() {
       var defer = $q.defer();
 
-      SpringDataRestAdapter.process($http.get(baseUrl)).then(function success(procesedResponse) {
-        var retrievedPeople = _.map(procesedResponse._embeddedItems, function toPerson(item) {
+      SpringDataRestAdapter.process($http.get(baseUrl)).then(function success(processedResponse) {
+        var retrievedPeople = _.map(processedResponse._embeddedItems, function toPerson(item) {
           return new ppl.Person(item);
         });
         defer.resolve(retrievedPeople);
       });
+      return defer.promise;
+    }
+
+    function getPerson(id) {
+      var defer = $q.defer();
+      if (id) {
+        $http.get(baseUrl + id).then(function success(personData) {
+          defer.resolve(new ppl.Person(personData));
+        });
+      } else {
+        defer.reject('No ID given');
+      }
       return defer.promise;
     }
 
@@ -31,23 +43,19 @@ var ppl = ppl || {};
 
     function updatePerson(person) {
       var defer = $q.defer();
-      $http.put(person.selfLink, JSON.stringify(person)).then(function onSuccess(response) {
-        $log.info(response);
-        defer.resolve();
-      });
+      $http.put(person.selfLink, JSON.stringify(person)).then(defer.resolve);
       return defer.promise;
     }
 
     function deletePerson(person) {
       var defer = $q.defer();
-      $http.delete(person.selfLink).then(function onSuccess(data, status, headers, config) {
-        defer.resolve();
-      });
+      $http.delete(person.selfLink).then(defer.resolve);
       return defer.promise;
     }
 
     return {
       getAllPeople: getAllPeople,
+      getPerson: getPerson,
       createPerson: createPerson,
       updatePerson: updatePerson,
       deletePerson: deletePerson

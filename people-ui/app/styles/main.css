@@ -9,6 +9,14 @@ body {
   padding: 0;
 }
 
+select {
+  margin-right: 15px;
+}
+
+input {
+  margin: 10px;
+}
+
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,

@@ -8,7 +8,7 @@
   <input id="create" type="button" value="Create" ng-click="createPerson(newPerson)">
 </form>
 <br/>
-<h4>View, Update and Delete Existing People</h4>
+<h3>View, Update and Delete Existing People</h3>
 <div ng-repeat="person in people | orderBy:'lastName'">
 
   <form action="#"><input id="firstName" ng-model="person.firstName" type="text">
