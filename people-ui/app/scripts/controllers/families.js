@@ -28,20 +28,25 @@ var ppl = ppl || {};
         $scope.newFamily = [
           new ppl.Person({})
         ];
-        getAllFamilies();
+        refresh();
       });
     };
 
     $scope.addPersonToFamily = function addPersonToFamily(personLink, familyLink) {
       FamiliesService.addPersonToFamily(personLink, familyLink).then(function () {
         $scope.personToAdd = undefined;
-        getAllFamilies();
+        refresh();
       });
     };
 
     $scope.removePersonFromFamily = function removePersonFromFamily(person) {
       FamiliesService.removePersonFromFamily(person).then(getAllFamilies);
     };
+
+    function refresh() {
+      getAllFamilies();
+      getAllPeople();
+    }
 
     function getAllFamilies() {
       FamiliesService.getAllFamilies().then(function retrieved(data) {
@@ -76,8 +81,7 @@ var ppl = ppl || {};
       FamiliesService.deleteFamily(family).then(getAllFamilies);
     };
 
-    getAllPeople();
-    getAllFamilies();
+    refresh();
   }
 })(ppl);
 

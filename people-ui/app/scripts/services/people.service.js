@@ -3,7 +3,7 @@
 var ppl = ppl || {};
 
 (function (ns) {
-  ns.PeopleService = function PeopleService($http, SpringDataRestAdapter, $q, $log) {
+  ns.PeopleService = function PeopleService($http, SpringDataRestAdapter, $q) {
 
     var baseUrl = 'http://localhost:8080/people';
 
@@ -33,11 +33,15 @@ var ppl = ppl || {};
 
     function createPerson(person) {
       var defer = $q.defer();
-      SpringDataRestAdapter.process($http.post(baseUrl, person)).then(function success(processedResponse) {
-        var createdPerson = new ppl.Person(person);
-        createdPerson.setSelfLink(processedResponse.headers('location'));
-        defer.resolve(createdPerson);
-      });
+      if (person.firstName || person.lastName) {
+        SpringDataRestAdapter.process($http.post(baseUrl, person)).then(function success(processedResponse) {
+          var createdPerson = new ppl.Person(person);
+          createdPerson.setSelfLink(processedResponse.headers('location'));
+          defer.resolve(createdPerson);
+        });
+      } else {
+        defer.resolve();
+      }
       return defer.promise;
     }
 
@@ -68,5 +72,4 @@ angular.module('peopleUiApp')
     '$http',
     'SpringDataRestAdapter',
     '$q',
-    '$log',
     ppl.PeopleService]);
