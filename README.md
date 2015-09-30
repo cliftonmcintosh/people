@@ -28,10 +28,9 @@ There are two views, one for people, and one for families.
 
 ### Don't want to have to run with grunt?
 
-A zipped dist folder for the UI has been provided. You can start up the ui a simple web server such as Python's SimpleHTTPServer on whatever port you want (try to avoid 8080 since that is where the API is set to run) by unzipping the dist, changing into the root directory and running, like this:
+A zipped dist folder for the UI has been provided. You don't even need a server for the UI. You can just open the index.html file in a browser and go from there. But if you want something nicer, you can start up the ui a simple web server such as Python's SimpleHTTPServer on whatever port you want (try to avoid 8080 since that is where the API is set to run) by unzipping the dist, changing into the root directory and running, like this:
 
 `python -m SimpleHTTPServer 9000`
-
 
 ## Running the RESTful web service
 The people-api part of the project includes a Gradle wrapper and can be run from the people-api directory by invoking bootRun with the wrapper:
