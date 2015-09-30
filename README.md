@@ -28,7 +28,7 @@ There are two views, one for people, and one for families.
 
 ### Don't want to have to run with grunt?
 
-A zipped dist folder for the UI has been provided. You don't even need a server for the UI. You can just open the index.html file in a browser and go from there. But if you want something nicer, you can start up the ui a simple web server such as Python's SimpleHTTPServer on whatever port you want (try to avoid 8080 since that is where the API is set to run) by unzipping the dist, changing into the root directory and running, like this:
+A zipped dist file for the UI has been provided. You don't even need a server for the UI. You can just unzip people-ui-dist.zip, user your browser to open the index.html inside the unzipped dist directory, and go from there. But if you want something nicer, you can start up the ui a simple web server such as Python's SimpleHTTPServer on whatever port you want (try to avoid 8080 since that is where the API is set to run) by unzipping the dist, changing into the root directory and running, like this:
 
 `python -m SimpleHTTPServer 9000`
 
@@ -36,6 +36,12 @@ A zipped dist folder for the UI has been provided. You don't even need a server 
 The people-api part of the project includes a Gradle wrapper and can be run from the people-api directory by invoking bootRun with the wrapper:
 
 `./gradlew bootRun`
+
+### Prefer running from a jar file instead of using Gradle?
+
+The people-api is built in the people-api.jar. You can run it with:
+
+`java -jar people-api.jar`
 
 ## Using the API
 
