@@ -84,4 +84,6 @@ Deleting a family is done by making a DELETE request to the family's endpoint:
 
 `curl -i -H "Accept: application/json" -X DELETE http://localhost:8080/families/3`
 
-This deletes the family. It dissolves the family and removes each person's association with that family, but it does not kill its people.
+~~This deletes the family. It dissolves the family and removes each person's association with that family, but it does not kill its people.~~
+
+This deletes the family. It dissolves the family and deletes each person who is associated with that family.
